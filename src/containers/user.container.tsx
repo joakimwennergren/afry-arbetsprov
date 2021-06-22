@@ -1,36 +1,31 @@
 /**
- * Dashboard container
  * 
  * @category Containers
- * @package  Webbapplication
+ * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
- * @license  Copyright (C) Databeams AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
-import { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useState, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowRight, Plus } from 'react-feather';
-import Select from 'react-select'
 import { Link } from "react-router-dom";
 import { createUser } from "../actions/user.actions";
 import { toast } from 'react-toastify';
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-]
+import { RootState } from "../store/store";
+import Select from 'react-select'
 
-
-const UsersContainer = () => {
+const UsersContainer: FunctionComponent = (): JSX.Element => {
 
     // Redux dispatch
     const dispatch = useDispatch();
 
+    // State
     const [userName, setUserName] = useState("");
     const [selectedCompany, setSelectedCompany] = useState(-1);
+
+    // Selectors
+    const companies = useSelector((state: RootState) => state.companies.companies);
 
     const create = () => {
         if (userName.length > 0) {
@@ -39,11 +34,8 @@ const UsersContainer = () => {
         }
     }
 
-    const companies = useSelector((state: any) => state.companies.companies);
-
-
     const formatCompanies = () => {
-        return companies.map((company: any, index: number) => {
+        return companies.map((company: string, index: number) => {
             return {
                 value: index,
                 label: company,

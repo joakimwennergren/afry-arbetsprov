@@ -1,14 +1,10 @@
 /**
- * Root reducer
- * React-native version 0.63.3
  * 
- * @category Reducers
+ * @category Reducer
  * @package  App
- * @author   Joakim Wennergren <joakim@activequiz.com>
- * @license  Copyright (C) ActiveQuiz AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/ActiveQuiz-AB/ActiveQuiz-mobile-app
+ * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
 import { combineReducers } from 'redux';
 import { userReducer } from "./user.reducer";

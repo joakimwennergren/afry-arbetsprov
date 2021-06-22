@@ -1,11 +1,11 @@
 /**
  * Redux store
  * 
- * @category Store
+ * @category Reducer
  * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
  * @license  Copyright (C) Joakim Wennergren 2021
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist'

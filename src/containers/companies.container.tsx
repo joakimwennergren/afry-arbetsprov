@@ -1,36 +1,35 @@
 /**
- * Dashboard container
  * 
  * @category Containers
- * @package  Webbapplication
+ * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
- * @license  Copyright (C) Databeams AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
-import { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useState, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowRight, Plus, ArrowLeft, Trash } from 'react-feather';
-import Select from 'react-select'
-
 import { createCompany } from "../actions/company.actions";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { RootState } from "../store/store";
+import { User } from "../typings/user";
+import Select from 'react-select'
 import CompanyUserComponent from '../components/companyuser.component';
 
 
-const UsersContainer = () => {
+const UsersContainer: FunctionComponent = (): JSX.Element => {
 
     // Redux dispatch
     const dispatch = useDispatch();
 
+    // State
     const [companyName, setCompanyName] = useState("");
     const [selectedCompany, setSelectedCompany] = useState(-1);
 
-    const companies = useSelector((state: any) => state.companies.companies);
-    const users = useSelector((state: any) => state.users.users);
+    // Selectors
+    const companies = useSelector((state: RootState) => state.companies.companies);
+    const users = useSelector((state: RootState) => state.users.users);
 
     const create = () => {
         if (companyName.length > 0) {
@@ -39,12 +38,8 @@ const UsersContainer = () => {
         }
     }
 
-
-
-
-
     const formatCompanies = () => {
-        return companies.map((company: any, index: number) => {
+        return companies.map((company: string, index: number) => {
             return {
                 value: index,
                 label: company,
@@ -57,15 +52,14 @@ const UsersContainer = () => {
     }
 
     const renderList = () => {
-        const companyUsers = users.filter((user: any) => {
+        const companyUsers = users.filter((user: User) => {
             if (user) {
                 return user.company === selectedCompany && user.company !== -1;
             }
 
         });
 
-        return companyUsers.map((user: any, index: number) => {
-
+        return companyUsers.map((user: User, index: number) => {
             return <CompanyUserComponent key={`company-user-${index}`} user={user} />
         });
     }

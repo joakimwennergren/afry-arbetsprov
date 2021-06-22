@@ -1,13 +1,10 @@
 /**
- * Redux store
  * 
  * @category Reducer
  * @package  App
- * @author   Joakim Wennergren <joakim.wennergren@activequiz.com>
- * @license  Copyright (C) ActiveQuiz AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/ActiveQuiz-AB/ActiveQuiz-mobile-app
+ * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
 import {
     CREATE_USER,
@@ -15,8 +12,10 @@ import {
     ATTACH_USER,
 } from "../actions/user.actions";
 
+import { User } from "../typings/user";
+
 export type SessionState = {
-    users: any;
+    users: User[];
 }
 
 export type SessionAction = {
@@ -45,7 +44,7 @@ export const userReducer = (state: SessionState = defaultState, action: SessionA
 
         case DETACH_USER:
 
-            const users = state.users.map((user: any) => {
+            const users = state.users.map((user: User) => {
                 if (user.uniqueID === payload.uniqueID) {
                     user.company = -1;
                 }
@@ -59,7 +58,7 @@ export const userReducer = (state: SessionState = defaultState, action: SessionA
 
         case ATTACH_USER:
 
-            const newUsers = state.users.map((user: any) => {
+            const newUsers = state.users.map((user: User) => {
                 if (user.uniqueID === payload.user.uniqueID) {
                     user.company = payload.companyIndex;
                 }

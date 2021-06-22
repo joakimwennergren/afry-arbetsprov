@@ -1,28 +1,26 @@
 /**
- * Dashboard container
  * 
  * @category Containers
- * @package  Webbapplication
+ * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
- * @license  Copyright (C) Databeams AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
+import { FunctionComponent } from 'react';
 import { useSelector } from "react-redux";
 import { ArrowLeft, } from 'react-feather';
 import { Link } from "react-router-dom";
+import { RootState } from "../store/store";
+import { User } from "../typings/user";
 import ListComponent from "../components/list.component";
 
+const UsersContainer: FunctionComponent = (): JSX.Element => {
 
-
-const UsersContainer = () => {
-
-    const usersNotBoundToCompany = useSelector((state: any) => state.users.users);
+    const users = useSelector((state: RootState) => state.users.users);
 
     const renderList = () => {
-        if (usersNotBoundToCompany || usersNotBoundToCompany.length > 0) {
-            return usersNotBoundToCompany.map((user: any) => {
+        if (users || users.length > 0) {
+            return users.map((user: User) => {
 
                 if (user.company !== -1) return;
 
@@ -30,7 +28,6 @@ const UsersContainer = () => {
                     <ListComponent user={user} />
                 )
             })
-
         }
     }
 

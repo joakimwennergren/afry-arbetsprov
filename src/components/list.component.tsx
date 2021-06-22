@@ -1,34 +1,34 @@
 /**
- * Dashboard container
- * 
- * @category Containers
- * @package  Webbapplication
+ * @category Components
+ * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
- * @license  Copyright (C) Databeams AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Share2 } from 'react-feather';
 import { attachUser } from "../actions/user.actions";
+import { RootState } from "../store/store";
+import { User } from "../typings/user";
 import Select from 'react-select'
 
-const ListComponent = ({ user }: any) => {
+export type ListComponentProps = {
+    user: User;
+}
+
+const ListComponent: FunctionComponent<ListComponentProps> = ({ user }): JSX.Element => {
 
     const dispatch = useDispatch();
 
-    const companies = useSelector((state: any) => state.companies.companies);
-
+    // State
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const add = (user: any) => {
-
-    }
+    // Selectors
+    const companies = useSelector((state: RootState) => state.companies.companies);
 
     const formatCompanies = () => {
-        return companies.map((company: any, index: number) => {
+        return companies.map((company: string, index: number) => {
             return {
                 value: index,
                 label: company,

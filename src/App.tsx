@@ -1,3 +1,13 @@
+/**
+ * Main entrypoint
+ * 
+ * @category Entrypoint
+ * @package  App
+ * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
+ */
+
 import React, { Suspense, FunctionComponent } from 'react';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';
@@ -19,7 +29,7 @@ const App: FunctionComponent = (): JSX.Element => {
   return (
     <Provider store={store}>
       <ToastContainer />
-      <PersistGate loading={<p>laddar</p>} persistor={persistor}>
+      <PersistGate loading={<p>laddar..</p>} persistor={persistor}>
         <Router>
           <Suspense fallback={<p>laddar..</p>}>
             <Switch>

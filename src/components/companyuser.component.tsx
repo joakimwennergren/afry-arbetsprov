@@ -1,28 +1,24 @@
 /**
- * Dashboard container
- * 
- * @category Containers
- * @package  Webbapplication
+ * @category Components
+ * @package  App
  * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
- * @license  Copyright (C) Databeams AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/Databeams/Mikbits-webapplication.git
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
-import { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { FunctionComponent } from 'react';
+import { useDispatch } from "react-redux";
 import { Trash } from 'react-feather';
-import Select from 'react-select'
+import { User } from "../typings/user";
 import { detachUser } from "../actions/user.actions";
 
-const CompanyUserComponent = ({ user }: any) => {
+export type CompanyUserComponentProps = {
+    user: User;
+}
+const CompanyUserComponent: FunctionComponent<CompanyUserComponentProps> = ({ user }): JSX.Element => {
 
     const dispatch = useDispatch();
 
-    const companies = useSelector((state: any) => state.companies.companies);
-    const users = useSelector((state: any) => state.users.users);
-
-    const remove = (user: any) => {
+    const remove = (user: User) => {
         dispatch(detachUser(user));
     }
 

@@ -1,22 +1,17 @@
 /**
- * Redux store
  * 
  * @category Reducer
  * @package  App
- * @author   Joakim Wennergren <joakim.wennergren@activequiz.com>
- * @license  Copyright (C) ActiveQuiz AB - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * @link     https://github.com/ActiveQuiz-AB/ActiveQuiz-mobile-app
+ * @author   Joakim Wennergren <joakim.wennergren@databeams.se>
+ * @license  Copyright (C) Joakim Wennergren 2021
+ * @link     https://github.com/joakimwennergren/afry-arbetsprov.git
  */
 import {
     CREATE_COMPANY,
-    CREATE_COMPANY_FAILED,
-    CREATE_COMPANY_SUCCESS
 } from "../actions/company.actions";
 
 export type SessionState = {
-    companies: any;
+    companies: string[];
 }
 
 export type SessionAction = {

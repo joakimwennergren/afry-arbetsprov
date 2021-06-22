@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense, FunctionComponent } from 'react';
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux';
+import { store, persistor } from "./store/store";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-function App() {
+const UsersContainer = React.lazy(() => import('./containers/user.container'));
+const CompaniesContainer = React.lazy(() => import('./containers/companies.container'));
+const ListContainer = React.lazy(() => import('./containers/list.container'));
+
+const App: FunctionComponent = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ToastContainer />
+      <PersistGate loading={<p>laddar</p>} persistor={persistor}>
+        <Router>
+          <Suspense fallback={<p>laddar..</p>}>
+            <Switch>
+              <Route exact path="/" component={UsersContainer} />
+              <Route exact path="/user" component={UsersContainer} />
+              <Route exact path="/companies" component={CompaniesContainer} />
+              <Route exact path="/list" component={ListContainer} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 
